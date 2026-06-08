@@ -8,9 +8,9 @@ if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     dataset = ArithmeticDataset("data/data.txt", sorted(list("0123456789+=")), max_len=6)
     model = GPT(vocab_size=dataset.vocab_size,
-                embed_dim=32,
-                num_heads=4,
-                num_layers=3,
+                embed_dim=8,
+                num_heads=1,
+                num_layers=1,
                 max_len=6).to(device)
 
     model.load_state_dict(torch.load("model.pth", map_location=device))
