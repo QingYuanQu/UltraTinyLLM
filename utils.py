@@ -1,5 +1,4 @@
 import random
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -49,7 +48,9 @@ def generate(model, device, dataset, prompt, max_new):
         next_id = logits[0, -1].argmax().item()
         generated.append(next_id)
         input_ids = torch.tensor([generated], device=device)
+        char = dataset.itos[next_id]
+        yield  char
 
-    output_ids = generated[len(ids):]
-    result = ''.join([dataset.itos[i] for i in output_ids])
-    return result
+    # output_ids = generated[len(ids):]
+    # result = ''.join([dataset.itos[i] for i in output_ids])
+    # return result

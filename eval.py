@@ -1,3 +1,5 @@
+import time
+
 import torch
 
 from datasets import ArithmeticDataset
@@ -30,7 +32,12 @@ if __name__ == "__main__":
         parts = line.split('等于')
         question = parts[0] + '等于'  # question 包含 "等于"，作为 prompt
         expected_answer = parts[1]  # 答案部分，如 "零九"、"一八"
-        answer = generate(model, device, dataset, question, max_new=2)
+        answer_chars = []
+        for char in generate(model, device, dataset, question, max_new=2):
+            answer_chars.append(char)
+            print(char, end='', flush=True)  # 逐字打印
+            time.sleep(1)
+        answer = ''.join(answer_chars)
         is_correct = answer == expected_answer
         if is_correct:
             correct += 1
