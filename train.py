@@ -11,7 +11,8 @@ if __name__ == "__main__":
     SEED = 42
     set_seed(SEED)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    dataset = ArithmeticDataset("data/data.txt",sorted(list("0123456789+=")), max_len=6)
+    vocab = ["加", "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "等于"]
+    dataset = ArithmeticDataset("data/data.txt", vocab, max_len=6)
     dataloader = DataLoader(dataset, batch_size=87, shuffle=True, num_workers=0, pin_memory=True, drop_last=False)
 
     model = GPT(vocab_size=dataset.vocab_size,

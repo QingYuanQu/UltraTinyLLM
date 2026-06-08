@@ -6,7 +6,8 @@ from utils import generate
 
 if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    dataset = ArithmeticDataset("data/data.txt", sorted(list("0123456789+=")), max_len=6)
+    vocab = ["加", "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "等于"]
+    dataset = ArithmeticDataset("data/data.txt", vocab, max_len=6)
     model = GPT(vocab_size=dataset.vocab_size,
                 embed_dim=8,
                 num_heads=1,
@@ -26,15 +27,16 @@ if __name__ == "__main__":
     print("=" * 60)
 
     for idx, line in enumerate(test_lines, 1):
-        question = line[:-2]
-        expected_answer = line.split('=')[1]
+        parts = line.split('等于')
+        question = parts[0] + '等于'  # question 包含 "等于"，作为 prompt
+        expected_answer = parts[1]  # 答案部分，如 "零九"、"一八"
         answer = generate(model, device, dataset, question, max_new=2)
         is_correct = answer == expected_answer
         if is_correct:
             correct += 1
 
         status = "✓" if is_correct else "✗"
-        print(f"[{idx}/{total}] {status} {question}={answer:3s}  (期望: {expected_answer})")
+        print(f"[{idx}/{total}] {status} {question}{answer}  (期望: {expected_answer})")
 
     # ===================== 统计结果 =====================
     print("=" * 60)

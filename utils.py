@@ -40,7 +40,7 @@ import torch
 @torch.no_grad()
 def generate(model, device, dataset, prompt, max_new):
     model.eval()
-    ids = [dataset.stoi[c] for c in prompt]
+    ids = dataset._tokenize(prompt)
     input_ids = torch.tensor([ids], device=device)
 
     generated = ids[:]
