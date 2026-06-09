@@ -61,9 +61,8 @@ python train.py
 ```
 
 ### 推理
-![user-prompt.gif](data/user-prompt.gif)
 
-
+![eval.gif](data/eval.gif)
 
 
 ## License
