@@ -50,7 +50,3 @@ def generate(model, device, dataset, prompt, max_new):
         input_ids = torch.tensor([generated], device=device)
         char = dataset.itos[next_id]
         yield  char
-
-    # output_ids = generated[len(ids):]
-    # result = ''.join([dataset.itos[i] for i in output_ids])
-    # return result
