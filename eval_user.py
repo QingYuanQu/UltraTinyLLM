@@ -1,6 +1,5 @@
 import time
 import torch
-
 from datasets import ArithmeticDataset
 from model import GPT
 from utils import generate
@@ -20,14 +19,12 @@ if __name__ == "__main__":
     model.load_state_dict(torch.load("model.pth", map_location=device))
     model.eval()
 
-
     print("════════════════════════════════════════")
     print("          UltraTinyLLM                ")
     print("  🧠 732 个参数，学会加法 — 世界上最小的 GPT")
     print("  📚 以极小窥宏大，是您入门与探秘大模型的最佳起点")
     print("  🔗 github.com/QingYuanQu/UltraTinyLLM")
     print("════════════════════════════════════════")
-
     print("  🧮 中文加法推理 (输入 quit 退出)")
 
     while True:

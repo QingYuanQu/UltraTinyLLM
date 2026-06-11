@@ -14,7 +14,6 @@ def set_seed(seed=99):
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
 
-# -------------------- 5. 训练（返回损失历史）------------------------
 def train(model, dataloader, optimizer, device, epochs):
     model.train()
     criterion = nn.CrossEntropyLoss()
@@ -33,9 +32,6 @@ def train(model, dataloader, optimizer, device, epochs):
         avg_loss = total_loss / len(dataloader)
         print(f"Epoch {epoch+1}/{epochs} | Average Loss: {avg_loss:.4f}")
 
-import torch
-
-# -------------------- 6. 推理生成（自动停止） ------------------------
 @torch.no_grad()
 def generate(model, device, dataset, prompt, max_new):
     model.eval()

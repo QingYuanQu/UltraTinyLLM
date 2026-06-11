@@ -27,8 +27,6 @@ class TransformerBlock(nn.Module):
         x = x + self.ffn(self.ln2(x))
         return x
 
-
-
 class GPT(nn.Module):
     def __init__(self, vocab_size, embed_dim, num_heads, num_layers, max_len, dropout=0.0):
         super().__init__()

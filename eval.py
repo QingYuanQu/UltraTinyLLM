@@ -1,7 +1,5 @@
 import time
-
 import torch
-
 from datasets import ArithmeticDataset
 from model import GPT
 from utils import generate
@@ -15,7 +13,6 @@ if __name__ == "__main__":
                 num_heads=1,
                 num_layers=1,
                 max_len=6).to(device)
-
     model.load_state_dict(torch.load("model.pth", map_location=device))
     model.eval()
 
@@ -24,7 +21,6 @@ if __name__ == "__main__":
 
     correct = 0
     total = len(test_lines)
-
     print(f"\n开始测试 {total} 个样本...")
     print("=" * 60)
 
@@ -45,7 +41,6 @@ if __name__ == "__main__":
         status = "✓" if is_correct else "✗"
         print(f"[{idx}/{total}] {status} {question}{answer}  (期望: {expected_answer})")
 
-    # ===================== 统计结果 =====================
     print("=" * 60)
     accuracy = correct / total * 100 if total > 0 else 0
     print(f"\n测试结果汇总:")

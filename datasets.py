@@ -20,7 +20,6 @@ class ArithmeticDataset(Dataset):
         """最长匹配分词，支持多字符 token（如'等于'）"""
         tokens = []
         i = 0
-        # 按 token 长度降序排列，优先匹配长 token
         sorted_chars = sorted(self.chars, key=len, reverse=True)
         while i < len(text):
             matched = False
